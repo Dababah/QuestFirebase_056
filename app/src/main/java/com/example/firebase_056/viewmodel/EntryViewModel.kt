@@ -8,8 +8,10 @@ import com.example.firebase_056.repositori.RepositorySiswa
 import com.example.firebase_056.modeldata.toDataSiswa
 import androidx.compose.runtime.*
 
-class EntryViewModel(private val repositorySiswa: RepositorySiswa) : ViewModel() {
-    var uiStateSiswa by mutableStateOf(UIStateSiswa())
-        private set
-
-    /
+si untuk menyimpan data yang di-entry */
+    suspend fun addSiswa() {
+        if (validasiInput()) {
+            repositorySiswa.postDataSiswa(uiStateSiswa.detailSiswa.toDataSiswa())
+        }
+    }
+}
