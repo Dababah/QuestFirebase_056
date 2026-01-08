@@ -16,17 +16,14 @@ import kotlinx.serialization.InternalSerializationApi
 import java.io.IOException
 
 
-
-    private fun getSatuSiswa() {
+    fun hapusSatuSiswa() {
         viewModelScope.launch {
-            statusUIDetail = StatusUIDetail.Loading
-            statusUIDetail = try {
-                val siswa = repositorySiswa.getSatuSiswa(idSiswa)
-                    ?: throw IOException("Data siswa tidak ditemukan")
-
-                StatusUIDetail.Success(satusiswa = siswa)
+            try {
+                repositorySiswa.hapusSatuSiswa(idSiswa)
+                println("Sukses Hapus Data: $idSiswa")
             } catch (e: Exception) {
-                StatusUIDetail.Error
+                println("Gagal Hapus Data: ${e.message}")
             }
         }
     }
+}
