@@ -1,5 +1,9 @@
-package com.example.firebase_056.repositori
- catch (e: Exception) {
-            println("Gagal baca data siswa : ${e.message}")
-            null
-        }
+
+
+    override suspend fun hapusSatuSiswa(id: Long) {
+        val docQuery = collection.whereEqualTo("id", id).get().await()
+        val docId = docQuery.documents.firstOrNull()?.id ?: return
+        collection.document(docId).delete().await()
+    }
+}
+
